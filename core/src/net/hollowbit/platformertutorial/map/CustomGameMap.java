@@ -34,7 +34,7 @@ public class CustomGameMap extends GameMap {
 				for (int col = 0; col < map[0][0].length; col++) {//Loop through columns
 					TileType type = this.getTileTypeByCoordinate(layer, col, row);
 					if (type != null)
-						batch.draw(tiles[0][type.getId() - 1], col * TileType.TILE_SIZE, map[0].length * TileType.TILE_SIZE - row * TileType.TILE_SIZE);
+						batch.draw(tiles[0][type.getId() - 1], col * TileType.TILE_SIZE, map[0].length * TileType.TILE_SIZE - row * TileType.TILE_SIZE - TileType.TILE_SIZE);
 				}
 			}
 		}

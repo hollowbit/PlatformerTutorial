@@ -8,9 +8,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 
+import net.hollowbit.platformertutorial.map.CustomGameMap;
 import net.hollowbit.platformertutorial.map.GameMap;
 import net.hollowbit.platformertutorial.map.TileType;
-import net.hollowbit.platformertutorial.map.TiledGameMap;
 
 public class PlatformerGame extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -32,7 +32,7 @@ public class PlatformerGame extends ApplicationAdapter {
         camera.setToOrtho(false,w,h);
         camera.update();
         
-        gameMap = new TiledGameMap();
+        gameMap = new CustomGameMap();
 	}
 
 	@Override
@@ -56,13 +56,6 @@ public class PlatformerGame extends ApplicationAdapter {
         camera.update();
         gameMap.update(Gdx.graphics.getDeltaTime());
         gameMap.render(camera);
-        
-        if (gameMap.doesRectCollideWithWorld(pos.x, pos.y, 16, 16))
-        	System.out.println("Collision!!");
-        
-        batch.begin();
-        batch.draw(img, pos.x, pos.y, 16, 16);
-        batch.end();
 	}
 	
 	@Override
