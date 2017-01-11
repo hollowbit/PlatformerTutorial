@@ -31,7 +31,7 @@ public class CustomGameMap extends GameMap {
 		batch.begin();
 		for (int layer = 0; layer < map.length; layer++) {//Loop through layers
 			for (int row = 0; row < getHeight(); row++) {//Loop through rows
-				for (int col = 0; col < map[0][0].length; col++) {//Loop through columns
+				for (int col = 0; col < getWidth(); col++) {//Loop through columns
 					TileType type = this.getTileTypeByCoordinate(layer, col, row);
 					if (type != null)
 						batch.draw(tiles[0][type.getId() - 1], col * TileType.TILE_SIZE, row * TileType.TILE_SIZE);
