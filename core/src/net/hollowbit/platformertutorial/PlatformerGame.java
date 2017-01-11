@@ -20,6 +20,8 @@ public class PlatformerGame extends ApplicationAdapter {
     
     GameMap gameMap;
 	
+    float deltaX, deltaY;
+    
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -27,7 +29,7 @@ public class PlatformerGame extends ApplicationAdapter {
 		
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
-
+        
         camera = new OrthographicCamera();
         camera.setToOrtho(false,w,h);
         camera.update();
@@ -42,8 +44,11 @@ public class PlatformerGame extends ApplicationAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     	Vector3 pos = camera.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
         
-        if (Gdx.input.isTouched())
+        if (Gdx.input.isTouched()) {
         	camera.translate(-Gdx.input.getDeltaX(), Gdx.input.getDeltaY());
+        	deltaX -= Gdx.input.getDeltaX();
+        	deltaY += Gdx.input.getDeltaY();
+        }
         
         if (Gdx.input.justTouched()) {
         	TileType type = gameMap.getTileTypeByLocation(1, pos.x, pos.y);
@@ -53,9 +58,17 @@ public class PlatformerGame extends ApplicationAdapter {
         	}
         }
         
+        if (gameMap.doesRectCollideWithWorld(pos.x, pos.y, 16, 16)) {
+        	System.out.println("Collides with world!!");
+        }
+        
         camera.update();
         gameMap.update(Gdx.graphics.getDeltaTime());
         gameMap.render(camera);
+        
+        batch.begin();
+        batch.draw(img, pos.x - deltaX, pos.y - deltaY, 16, 16);
+        batch.end();
 	}
 	
 	@Override

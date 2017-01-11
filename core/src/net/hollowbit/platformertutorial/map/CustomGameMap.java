@@ -30,11 +30,11 @@ public class CustomGameMap extends GameMap {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		for (int layer = 0; layer < map.length; layer++) {//Loop through layers
-			for (int row = map[0].length - 1; row >= 0; row--) {//Loop through rows
+			for (int row = 0; row < getHeight(); row++) {//Loop through rows
 				for (int col = 0; col < map[0][0].length; col++) {//Loop through columns
 					TileType type = this.getTileTypeByCoordinate(layer, col, row);
 					if (type != null)
-						batch.draw(tiles[0][type.getId() - 1], col * TileType.TILE_SIZE, map[0].length * TileType.TILE_SIZE - row * TileType.TILE_SIZE - TileType.TILE_SIZE);
+						batch.draw(tiles[0][type.getId() - 1], col * TileType.TILE_SIZE, row * TileType.TILE_SIZE);
 				}
 			}
 		}
@@ -57,12 +57,15 @@ public class CustomGameMap extends GameMap {
 
 	@Override
 	public TileType getTileTypeByLocation (int layer, float x, float y) {
-		return this.getTileTypeByCoordinate(layer, (int) (x / TileType.TILE_SIZE), map[0].length - (int) (y / TileType.TILE_SIZE));
+		return this.getTileTypeByCoordinate(layer, (int) (x / TileType.TILE_SIZE), map[0].length - (int) (y / TileType.TILE_SIZE) - 1);
 	}
 
 	@Override
 	public TileType getTileTypeByCoordinate (int layer, int x, int y) {
-		return TileType.getTypeById(map[layer][y][x]);
+		if (x < 0 || x >= getWidth() || y < 0 || y >= getHeight())
+			return null;
+		
+		return TileType.getTypeById(map[layer][getHeight() - y - 1][x]);
 	}
 
 	@Override

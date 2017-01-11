@@ -25,10 +25,11 @@ public abstract class GameMap {
 	public abstract TileType getTileTypeByCoordinate (int layer, int x, int y);
 	
 	
-	/*public boolean doesRectCollideWithWorld (float x, float y, float width, float height) {
+	public boolean doesRectCollideWithWorld (float x, float y, float width, float height) {
 		if (x < 0 || y < 0 || x + width > getWidth() * TileType.TILE_SIZE || y + height > getHeight() * TileType.TILE_SIZE)
 			return true;
 		
+		System.out.println("");
 		for (int row = (int) (y / TileType.TILE_SIZE) - 1; row < (int) (height / TileType.TILE_SIZE) + (y / TileType.TILE_SIZE) + 2; row++) {
 			for (int col = (int) (x / TileType.TILE_SIZE) - 1; col < (int) (width / TileType.TILE_SIZE) + (x / TileType.TILE_SIZE) + 2; col++) {
 				if (row < 0 || row >= getHeight() || col < 0 || col >= getWidth())//If out of bounds, continue to next
@@ -37,9 +38,10 @@ public abstract class GameMap {
 				for (int layer = 0; layer < getLayers(); layer++) {
 					TileType type = getTileTypeByCoordinate(layer, col, row);
 					if (type != null && type.isCollidable()) {
+						System.out.println("Tile: " + type.getName());
 						float tileX = col * TileType.TILE_SIZE;
 						float tileY = row * TileType.TILE_SIZE;
-						System.out.println(x + "  " + y + "  " + tileX + "  " + tileY);
+						
 						if (x + width > tileX && x < tileX + TileType.TILE_SIZE && y + height > tileY && y < tileY + TileType.TILE_SIZE)
 							return true;
 					}
@@ -48,7 +50,7 @@ public abstract class GameMap {
 		}
 		
 		return false;
-	}*/
+	}
 	
 	public abstract int getWidth ();
 	public abstract int getHeight ();
