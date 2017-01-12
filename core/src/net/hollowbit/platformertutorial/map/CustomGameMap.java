@@ -10,6 +10,7 @@ import net.hollowbit.platformertutorial.map.custom.CustomGameMapLoader;
 
 public class CustomGameMap extends GameMap {
 	
+	private String id;
 	private String name;
 	private int[][][] map;
 	
@@ -17,9 +18,11 @@ public class CustomGameMap extends GameMap {
 	private TextureRegion[][] tiles;
 	
 	public CustomGameMap() {
-		CustomGameMapData data = CustomGameMapLoader.loadMap("basic");
+		CustomGameMapData data = CustomGameMapLoader.loadMap("basic", "Basic");
+		this.id = data.id;
 		this.name = data.name;
 		this.map = data.map;
+		CustomGameMapLoader.saveMap(id, name, map);
 		
 		batch = new SpriteBatch();
 		tiles = TextureRegion.split(new Texture("tiles.png"), 16, 16);

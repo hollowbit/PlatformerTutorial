@@ -38,7 +38,6 @@ public abstract class GameMap {
 				for (int layer = 0; layer < getLayers(); layer++) {
 					TileType type = getTileTypeByCoordinate(layer, col, row);
 					if (type != null && type.isCollidable()) {
-						System.out.println("Tile: " + type.getName());
 						float tileX = col * TileType.TILE_SIZE;
 						float tileY = row * TileType.TILE_SIZE;
 						
