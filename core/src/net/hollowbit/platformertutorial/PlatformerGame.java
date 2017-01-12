@@ -8,9 +8,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 
-import net.hollowbit.platformertutorial.map.CustomGameMap;
-import net.hollowbit.platformertutorial.map.GameMap;
-import net.hollowbit.platformertutorial.map.TileType;
+import net.hollowbit.platformertutorial.world.CustomGameMap;
+import net.hollowbit.platformertutorial.world.GameMap;
+import net.hollowbit.platformertutorial.world.TileType;
 
 public class PlatformerGame extends ApplicationAdapter {
 	SpriteBatch batch;
@@ -56,10 +56,6 @@ public class PlatformerGame extends ApplicationAdapter {
         	if (type != null) {
         		System.out.println("You touched a " + type.getName() + " tile!");
         	}
-        }
-        
-        if (gameMap.doesRectCollideWithWorld(pos.x, pos.y, 16, 16)) {
-        	System.out.println("Collides with world!!");
         }
         
         camera.update();
