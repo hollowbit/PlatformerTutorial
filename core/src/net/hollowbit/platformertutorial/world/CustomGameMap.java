@@ -14,7 +14,6 @@ public class CustomGameMap extends GameMap {
 	String name;
 	int[][][] map;
 	
-	private SpriteBatch batch;
 	private TextureRegion[][] tiles;
 	
 	public CustomGameMap () {
@@ -23,12 +22,11 @@ public class CustomGameMap extends GameMap {
 		this.name = data.name;
 		this.map = data.map;
 		
-		batch = new SpriteBatch();
 		tiles = TextureRegion.split(new Texture("tiles.png"), TileType.TILE_SIZE, TileType.TILE_SIZE);
 	}
 	
 	@Override
-	public void render(OrthographicCamera camera) {
+	public void render(OrthographicCamera camera, SpriteBatch batch) {
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		
@@ -42,18 +40,17 @@ public class CustomGameMap extends GameMap {
 			}
 		}
 		
+		super.render(camera, batch);
 		batch.end();
 	}
 
 	@Override
 	public void update(float delta) {
-		
+		super.update(delta);
 	}
 
 	@Override
-	public void dispose() {
-		batch.dispose();
-	}
+	public void dispose() {}
 	
 	@Override
 	public TileType getTileTypeByLocation(int layer, float x, float y) {
